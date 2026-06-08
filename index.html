@@ -1,12 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anupp Portfolio</title>
+
 <style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#111;
+    color:white;
+    text-align:center;
+}
+
+/* Banner */
+.banner{
+    width:100%;
+    height:250px;
+    background:url("banner.jpeg") center/cover no-repeat;
+}
+
+/* Photos Section */
 .profile-section{
     display:flex;
     justify-content:center;
     align-items:center;
     gap:25px;
     margin-top:-70px;
-    position:relative;
-    z-index:10;
 }
 
 .profile-pic{
@@ -15,7 +41,6 @@
     border-radius:50%;
     border:4px solid white;
     object-fit:cover;
-    box-shadow:0 0 20px rgba(255,255,255,0.4);
 }
 
 .side-photo{
@@ -23,19 +48,42 @@
     height:90px;
     border-radius:15px;
     object-fit:cover;
-    border:3px solid rgba(255,255,255,0.8);
-    transition:0.4s;
-}
-
-.side-photo:hover{
-    transform:scale(1.1);
+    border:3px solid white;
 }
 
 .left-photo{
-    box-shadow:0 0 15px rgba(255,0,0,0.6);
+    box-shadow:0 0 15px red;
 }
 
 .right-photo{
-    box-shadow:0 0 15px rgba(0,150,255,0.6);
+    box-shadow:0 0 15px deepskyblue;
+}
+
+h1{
+    margin-top:20px;
+}
+
+p{
+    margin-top:10px;
+    font-size:18px;
 }
 </style>
+</head>
+
+<body>
+
+<div class="banner"></div>
+
+<div class="profile-section">
+    <img src="profile1.jpeg" alt="F1" class="side-photo left-photo">
+
+    <img src="profile.jpeg" alt="Anupp" class="profile-pic">
+
+    <img src="profile2.jpeg" alt="Cricket" class="side-photo right-photo">
+</div>
+
+<h1>Anupp</h1>
+<p>F1 Enthusiast | Cricket Lover | Tech Lover</p>
+
+</body>
+</html>

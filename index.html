@@ -4,208 +4,251 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modern Calculator</title>
+<title>Advanced Scientific Calculator</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
 body{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
-    overflow:hidden;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#020617,#0f172a,#1e293b);
+overflow:hidden;
 }
 
-body::before,
-body::after{
-    content:"";
-    position:absolute;
-    width:300px;
-    height:300px;
-    border-radius:50%;
-    filter:blur(100px);
+.bg1,.bg2{
+position:absolute;
+width:350px;
+height:350px;
+border-radius:50%;
+filter:blur(120px);
 }
 
-body::before{
-    background:#00e5ff;
-    top:-100px;
-    left:-100px;
+.bg1{
+background:#00e5ff;
+top:-100px;
+left:-100px;
 }
 
-body::after{
-    background:#7c3aed;
-    bottom:-100px;
-    right:-100px;
+.bg2{
+background:#7c3aed;
+bottom:-100px;
+right:-100px;
 }
 
-.calculator{
-    position:relative;
-    width:380px;
-    padding:25px;
-    border-radius:30px;
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(20px);
-    border:1px solid rgba(255,255,255,0.15);
-    box-shadow:0 25px 45px rgba(0,0,0,0.35);
+.container{
+width:900px;
+height:650px;
+display:flex;
+gap:20px;
 }
 
-.top{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
+.calc{
+flex:2;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(25px);
+border:1px solid rgba(255,255,255,.15);
+border-radius:30px;
+padding:20px;
+box-shadow:0 20px 50px rgba(0,0,0,.4);
 }
 
-.title{
-    color:white;
-    font-size:1.1rem;
-    font-weight:600;
+.history{
+flex:1;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(25px);
+border:1px solid rgba(255,255,255,.15);
+border-radius:30px;
+padding:20px;
+color:white;
+overflow-y:auto;
 }
 
 .display{
-    width:100%;
-    height:90px;
-    border:none;
-    outline:none;
-    background:rgba(255,255,255,0.08);
-    color:white;
-    font-size:2.3rem;
-    text-align:right;
-    padding:15px;
-    border-radius:20px;
-    margin-bottom:20px;
+width:100%;
+height:90px;
+border:none;
+outline:none;
+font-size:2rem;
+padding:20px;
+text-align:right;
+border-radius:20px;
+background:rgba(255,255,255,.08);
+color:white;
+margin-bottom:20px;
 }
 
 .buttons{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:10px;
 }
 
 button{
-    height:70px;
-    border:none;
-    border-radius:18px;
-    font-size:1.3rem;
-    cursor:pointer;
-    color:white;
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(10px);
-    transition:0.25s;
+height:65px;
+border:none;
+border-radius:16px;
+background:rgba(255,255,255,.08);
+color:white;
+font-size:1rem;
+cursor:pointer;
+transition:.25s;
 }
 
 button:hover{
-    transform:translateY(-3px);
-    background:rgba(255,255,255,0.18);
+transform:translateY(-3px);
+background:rgba(255,255,255,.18);
 }
 
 .operator{
-    background:linear-gradient(135deg,#8b5cf6,#6366f1);
+background:linear-gradient(135deg,#8b5cf6,#6366f1);
 }
 
 .equal{
-    background:linear-gradient(135deg,#06b6d4,#14b8a6);
+background:linear-gradient(135deg,#06b6d4,#14b8a6);
 }
 
 .clear{
-    background:linear-gradient(135deg,#ef4444,#f97316);
+background:linear-gradient(135deg,#ef4444,#f97316);
 }
 
-.zero{
-    grid-column:span 2;
+h2{
+color:white;
+margin-bottom:15px;
+}
+
+.history-item{
+margin-bottom:10px;
+padding:10px;
+background:rgba(255,255,255,.05);
+border-radius:12px;
 }
 </style>
 </head>
 <body>
 
-<div class="calculator">
+<div class="bg1"></div>
+<div class="bg2"></div>
 
-    <div class="top">
-        <div class="title">Calculator</div>
-    </div>
+<div class="container">
 
-    <input type="text" id="display" class="display" readonly>
+<div class="calc">
 
-    <div class="buttons">
-        <button class="clear" onclick="clr()">AC</button>
-        <button onclick="del()">⌫</button>
-        <button class="operator" onclick="add('%')">%</button>
-        <button class="operator" onclick="add('/')">÷</button>
+<input id="display" class="display" placeholder="Enter Expression">
 
-        <button onclick="add('7')">7</button>
-        <button onclick="add('8')">8</button>
-        <button onclick="add('9')">9</button>
-        <button class="operator" onclick="add('*')">×</button>
+<div class="buttons">
 
-        <button onclick="add('4')">4</button>
-        <button onclick="add('5')">5</button>
-        <button onclick="add('6')">6</button>
-        <button class="operator" onclick="add('-')">−</button>
+<button class="clear" onclick="clearDisplay()">AC</button>
+<button onclick="append('(')">(</button>
+<button onclick="append(')')">)</button>
+<button onclick="append('pi')">π</button>
+<button onclick="append('e')">e</button>
 
-        <button onclick="add('1')">1</button>
-        <button onclick="add('2')">2</button>
-        <button onclick="add('3')">3</button>
-        <button class="operator" onclick="add('+')">+</button>
+<button onclick="append('sin(')">sin</button>
+<button onclick="append('cos(')">cos</button>
+<button onclick="append('tan(')">tan</button>
+<button onclick="append('asin(')">sin⁻¹</button>
+<button onclick="append('acos(')">cos⁻¹</button>
 
-        <button class="zero" onclick="add('0')">0</button>
-        <button onclick="add('.')">.</button>
-        <button class="equal" onclick="calculate()">=</button>
-    </div>
+<button onclick="append('atan(')">tan⁻¹</button>
+<button onclick="append('log(')">log</button>
+<button onclick="append('sqrt(')">√</button>
+<button onclick="append('^')">xʸ</button>
+<button class="operator" onclick="append('/')">÷</button>
+
+<button onclick="append('7')">7</button>
+<button onclick="append('8')">8</button>
+<button onclick="append('9')">9</button>
+<button class="operator" onclick="append('*')">×</button>
+<button onclick="append('derivative(')">d/dx</button>
+
+<button onclick="append('4')">4</button>
+<button onclick="append('5')">5</button>
+<button onclick="append('6')">6</button>
+<button class="operator" onclick="append('-')">−</button>
+<button onclick="append('integral(')">∫</button>
+
+<button onclick="append('1')">1</button>
+<button onclick="append('2')">2</button>
+<button onclick="append('3')">3</button>
+<button class="operator" onclick="append('+')">+</button>
+<button class="equal" onclick="calculate()">=</button>
+
+<button onclick="append('0')">0</button>
+<button onclick="append('.')">.</button>
 
 </div>
 
+</div>
+
+<div class="history">
+<h2>History</h2>
+<div id="history"></div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.2/math.min.js"></script>
+
 <script>
-const display = document.getElementById('display');
 
-function add(value){
-    display.value += value;
+const display=document.getElementById("display");
+const history=document.getElementById("history");
+
+function append(value){
+display.value+=value;
 }
 
-function clr(){
-    display.value = '';
-}
-
-function del(){
-    display.value = display.value.slice(0,-1);
+function clearDisplay(){
+display.value="";
 }
 
 function calculate(){
-    try{
-        display.value = eval(display.value);
-    }
-    catch{
-        display.value = 'Error';
-    }
+
+try{
+
+let exp=display.value;
+
+if(exp.startsWith("derivative(")){
+let inside=exp.replace("derivative(","").slice(0,-1);
+let result=math.derivative(inside,'x').toString();
+display.value=result;
+addHistory(exp,result);
+return;
 }
 
-document.addEventListener('keydown',(e)=>{
-    const key=e.key;
+if(exp.startsWith("integral(")){
+display.value="Use Algebrite for symbolic integration";
+return;
+}
 
-    if((key>='0'&&key<='9') || ['+','-','*','/','.','%'].includes(key)){
-        display.value += key;
-    }
+let result=math.evaluate(exp);
 
-    if(key==='Enter'){
-        calculate();
-    }
+addHistory(exp,result);
 
-    if(key==='Backspace'){
-        del();
-    }
+display.value=result;
 
-    if(key==='Escape'){
-        clr();
-    }
-});
+}
+catch{
+display.value="Error";
+}
+}
+
+function addHistory(exp,res){
+history.innerHTML=
+`<div class="history-item">${exp}<br><b>${res}</b></div>`
++ history.innerHTML;
+}
+
 </script>
 
 </body>

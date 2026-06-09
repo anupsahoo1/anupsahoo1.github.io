@@ -1,136 +1,213 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculator</title>
+<title>Modern Calculator</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:'Poppins',sans-serif;
 }
 
 body{
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
-    background:linear-gradient(135deg,#1e3c72,#2a5298);
+    background:linear-gradient(135deg,#0f172a,#1e293b,#334155);
+    overflow:hidden;
+}
+
+body::before,
+body::after{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    border-radius:50%;
+    filter:blur(100px);
+}
+
+body::before{
+    background:#00e5ff;
+    top:-100px;
+    left:-100px;
+}
+
+body::after{
+    background:#7c3aed;
+    bottom:-100px;
+    right:-100px;
 }
 
 .calculator{
-    background:#fff;
-    padding:20px;
-    border-radius:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.3);
-    width:320px;
+    position:relative;
+    width:380px;
+    padding:25px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,0.15);
+    box-shadow:0 25px 45px rgba(0,0,0,0.35);
 }
 
-#display{
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.title{
+    color:white;
+    font-size:1.1rem;
+    font-weight:600;
+}
+
+.display{
     width:100%;
-    height:70px;
+    height:90px;
     border:none;
     outline:none;
+    background:rgba(255,255,255,0.08);
+    color:white;
+    font-size:2.3rem;
     text-align:right;
-    font-size:2rem;
-    padding:10px;
-    margin-bottom:15px;
-    background:#f3f3f3;
-    border-radius:10px;
+    padding:15px;
+    border-radius:20px;
+    margin-bottom:20px;
 }
 
 .buttons{
     display:grid;
     grid-template-columns:repeat(4,1fr);
-    gap:10px;
+    gap:12px;
 }
 
 button{
-    height:60px;
+    height:70px;
     border:none;
-    border-radius:12px;
+    border-radius:18px;
     font-size:1.3rem;
     cursor:pointer;
-    transition:0.2s;
+    color:white;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
+    transition:0.25s;
 }
 
 button:hover{
-    transform:scale(1.05);
+    transform:translateY(-3px);
+    background:rgba(255,255,255,0.18);
 }
 
 .operator{
-    background:#ff9500;
-    color:white;
+    background:linear-gradient(135deg,#8b5cf6,#6366f1);
 }
 
 .equal{
-    background:#28a745;
-    color:white;
+    background:linear-gradient(135deg,#06b6d4,#14b8a6);
 }
 
 .clear{
-    background:#dc3545;
-    color:white;
+    background:linear-gradient(135deg,#ef4444,#f97316);
 }
 
-.number{
-    background:#e9ecef;
+.zero{
+    grid-column:span 2;
 }
 </style>
 </head>
-
 <body>
 
 <div class="calculator">
-    <input type="text" id="display" readonly>
+
+    <div class="top">
+        <div class="title">Calculator</div>
+    </div>
+
+    <input type="text" id="display" class="display" readonly>
 
     <div class="buttons">
-        <button class="clear" onclick="clearDisplay()">C</button>
-        <button class="operator" onclick="append('/')">÷</button>
-        <button class="operator" onclick="append('*')">×</button>
-        <button class="operator" onclick="append('-')">−</button>
+        <button class="clear" onclick="clr()">AC</button>
+        <button onclick="del()">⌫</button>
+        <button class="operator" onclick="add('%')">%</button>
+        <button class="operator" onclick="add('/')">÷</button>
 
-        <button class="number" onclick="append('7')">7</button>
-        <button class="number" onclick="append('8')">8</button>
-        <button class="number" onclick="append('9')">9</button>
-        <button class="operator" onclick="append('+')">+</button>
+        <button onclick="add('7')">7</button>
+        <button onclick="add('8')">8</button>
+        <button onclick="add('9')">9</button>
+        <button class="operator" onclick="add('*')">×</button>
 
-        <button class="number" onclick="append('4')">4</button>
-        <button class="number" onclick="append('5')">5</button>
-        <button class="number" onclick="append('6')">6</button>
+        <button onclick="add('4')">4</button>
+        <button onclick="add('5')">5</button>
+        <button onclick="add('6')">6</button>
+        <button class="operator" onclick="add('-')">−</button>
+
+        <button onclick="add('1')">1</button>
+        <button onclick="add('2')">2</button>
+        <button onclick="add('3')">3</button>
+        <button class="operator" onclick="add('+')">+</button>
+
+        <button class="zero" onclick="add('0')">0</button>
+        <button onclick="add('.')">.</button>
         <button class="equal" onclick="calculate()">=</button>
-
-        <button class="number" onclick="append('1')">1</button>
-        <button class="number" onclick="append('2')">2</button>
-        <button class="number" onclick="append('3')">3</button>
-        <button class="number" onclick="append('.')">.</button>
-
-        <button class="number" onclick="append('0')" style="grid-column:span 4;">0</button>
     </div>
+
 </div>
 
 <script>
-let display = document.getElementById("display");
+const display = document.getElementById('display');
 
-function append(value){
+function add(value){
     display.value += value;
 }
 
-function clearDisplay(){
-    display.value = "";
+function clr(){
+    display.value = '';
+}
+
+function del(){
+    display.value = display.value.slice(0,-1);
 }
 
 function calculate(){
     try{
         display.value = eval(display.value);
-    }catch{
-        display.value = "Error";
+    }
+    catch{
+        display.value = 'Error';
     }
 }
+
+document.addEventListener('keydown',(e)=>{
+    const key=e.key;
+
+    if((key>='0'&&key<='9') || ['+','-','*','/','.','%'].includes(key)){
+        display.value += key;
+    }
+
+    if(key==='Enter'){
+        calculate();
+    }
+
+    if(key==='Backspace'){
+        del();
+    }
+
+    if(key==='Escape'){
+        clr();
+    }
+});
 </script>
 
 </body>
 </html>
+```

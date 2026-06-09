@@ -1,364 +1,136 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Anupp | Portfolio</title>
+<title>Calculator</title>
 
 <style>
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Segoe UI',sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
 }
 
 body{
-background:#050505;
-color:white;
-overflow-x:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:linear-gradient(135deg,#1e3c72,#2a5298);
 }
 
-/* OPENING ANIMATION */
-
-.left{
-opacity:0;
-animation:slideLeft 2s ease forwards;
-animation-delay:1.2s;
+.calculator{
+    background:#fff;
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+    width:320px;
 }
 
-.right{
-opacity:0;
-animation:slideRight 2s ease forwards;
-animation-delay:1.2s;
+#display{
+    width:100%;
+    height:70px;
+    border:none;
+    outline:none;
+    text-align:right;
+    font-size:2rem;
+    padding:10px;
+    margin-bottom:15px;
+    background:#f3f3f3;
+    border-radius:10px;
 }
 
-.center-profile{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-text-align:center;
-z-index:100;
-animation:profileZoom 1.5s ease forwards;
+.buttons{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
 }
 
-.center-profile h1,
-.tagline{
-opacity:0;
-animation:fadeIn 1s ease forwards;
-animation-delay:2.3s;
+button{
+    height:60px;
+    border:none;
+    border-radius:12px;
+    font-size:1.3rem;
+    cursor:pointer;
+    transition:0.2s;
 }
 
-.cards,
-.quote,
-footer{
-opacity:0;
-animation:fadeIn 1s ease forwards;
-animation-delay:2.8s;
+button:hover{
+    transform:scale(1.05);
 }
 
-/* HERO */
-
-.hero{
-height:100vh;
-display:flex;
-position:relative;
-overflow:hidden;
+.operator{
+    background:#ff9500;
+    color:white;
 }
 
-.left,.right{
-width:50%;
-position:relative;
+.equal{
+    background:#28a745;
+    color:white;
 }
 
-.side-image{
-width:100%;
-height:100%;
-object-fit:cover;
-filter:brightness(35%);
-animation:circleReveal 2s ease forwards;
+.clear{
+    background:#dc3545;
+    color:white;
 }
 
-.overlay{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-text-align:center;
-color:white;
+.number{
+    background:#e9ecef;
 }
-
-.overlay p{
-font-size:26px;
-margin:10px 0;
-font-weight:bold;
-}
-
-/* PROFILE */
-
-.center-profile img{
-width:250px;
-height:250px;
-border-radius:50%;
-object-fit:cover;
-border:6px solid white;
-box-shadow:0 0 35px rgba(255,255,255,.6);
-}
-
-.center-profile h1{
-font-size:65px;
-margin-top:20px;
-}
-
-.tagline{
-font-size:24px;
-font-weight:bold;
-margin-top:10px;
-}
-
-.f1{
-color:#ff3131;
-}
-
-.cricket{
-color:#3ea6ff;
-}
-
-.tech{
-color:#2ecc71;
-}
-
-/* CARDS */
-
-.cards{
-max-width:1400px;
-margin:50px auto;
-padding:20px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:20px;
-}
-
-.card{
-background:#111;
-border:1px solid #333;
-border-radius:15px;
-padding:25px;
-transition:.3s;
-}
-
-.card:hover{
-transform:translateY(-5px);
-}
-
-.card h3{
-font-size:28px;
-margin-bottom:15px;
-}
-
-.card p{
-line-height:1.8;
-}
-
-.card ul{
-padding-left:20px;
-}
-
-.card li{
-margin-bottom:10px;
-}
-
-/* QUOTE */
-
-.quote{
-max-width:1200px;
-margin:40px auto;
-padding:25px;
-border:2px solid #ff3131;
-border-radius:15px;
-text-align:center;
-font-size:28px;
-font-weight:bold;
-}
-
-/* FOOTER */
-
-footer{
-background:#000;
-text-align:center;
-padding:25px;
-margin-top:40px;
-color:#aaa;
-}
-
-/* ANIMATIONS */
-
-@keyframes profileZoom{
-0%{
-transform:translate(-50%,-50%) scale(0.1);
-}
-100%{
-transform:translate(-50%,-50%) scale(1);
-}
-}
-
-@keyframes slideLeft{
-0%{
-transform:translateX(-100%);
-opacity:0;
-}
-100%{
-transform:translateX(0);
-opacity:1;
-}
-}
-
-@keyframes slideRight{
-0%{
-transform:translateX(100%);
-opacity:0;
-}
-100%{
-transform:translateX(0);
-opacity:1;
-}
-}
-
-@keyframes fadeIn{
-from{
-opacity:0;
-}
-to{
-opacity:1;
-}
-}
-
-@keyframes circleReveal{
-0%{
-clip-path:circle(0% at 50% 50%);
-}
-100%{
-clip-path:circle(100% at 50% 50%);
-}
-}
-
 </style>
 </head>
 
 <body>
 
-<section class="hero">
+<div class="calculator">
+    <input type="text" id="display" readonly>
 
-<div class="left">
+    <div class="buttons">
+        <button class="clear" onclick="clearDisplay()">C</button>
+        <button class="operator" onclick="append('/')">÷</button>
+        <button class="operator" onclick="append('*')">×</button>
+        <button class="operator" onclick="append('-')">−</button>
 
-<img src="profile1.jpeg" class="side-image" alt="Formula 1">
+        <button class="number" onclick="append('7')">7</button>
+        <button class="number" onclick="append('8')">8</button>
+        <button class="number" onclick="append('9')">9</button>
+        <button class="operator" onclick="append('+')">+</button>
 
-<div class="overlay">
-<p>🏎 Speed</p>
-<p>🎯 Precision</p>
-<p>🔥 Passion</p>
+        <button class="number" onclick="append('4')">4</button>
+        <button class="number" onclick="append('5')">5</button>
+        <button class="number" onclick="append('6')">6</button>
+        <button class="equal" onclick="calculate()">=</button>
+
+        <button class="number" onclick="append('1')">1</button>
+        <button class="number" onclick="append('2')">2</button>
+        <button class="number" onclick="append('3')">3</button>
+        <button class="number" onclick="append('.')">.</button>
+
+        <button class="number" onclick="append('0')" style="grid-column:span 4;">0</button>
+    </div>
 </div>
 
-</div>
+<script>
+let display = document.getElementById("display");
 
-<div class="right">
+function append(value){
+    display.value += value;
+}
 
-<img src="profile2.jpeg" class="side-image" alt="Cricket">
+function clearDisplay(){
+    display.value = "";
+}
 
-<div class="overlay">
-<p>🏏 Focus</p>
-<p>💪 Determination</p>
-<p>🏆 Glory</p>
-</div>
-
-</div>
-
-<div class="center-profile">
-
-<img src="profile.jpeg" alt="Anupp">
-
-<h1>Anupp</h1>
-
-<div class="tagline">
-<span class="f1">F1 Enthusiast</span> |
-<span class="cricket">Cricket Lover</span> |
-<span class="tech">Tech Lover</span>
-</div>
-
-</div>
-
-</section>
-
-<section class="cards">
-
-<div class="card">
-<h3>👤 About Me</h3>
-
-<p>
-Hey! I'm Anupp, a passionate student who loves the thrill of Formula 1
-and the excitement of Cricket. I am also deeply interested in
-technology and enjoy learning new things every day. My interests
-range from motorsport engineering and race strategy to gaming,
-smartphones and innovation.
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>🏎 Formula 1</h3>
-
-<ul>
-<li>Love the speed and engineering behind F1 cars</li>
-<li>Follow race weekends and qualifying sessions</li>
-<li>Enjoy team strategies and pit stop battles</li>
-<li>Interested in aerodynamics and motorsport technology</li>
-<li>Watch highlights, interviews and race analysis</li>
-</ul>
-
-</div>
-
-<div class="card">
-
-<h3>🏏 Cricket</h3>
-
-<ul>
-<li>Follow IPL and International Cricket</li>
-<li>Enjoy close matches and big tournaments</li>
-<li>Love batting masterclasses and match-winning innings</li>
-<li>Follow player performances and statistics</li>
-<li>Support the spirit of competition and teamwork</li>
-</ul>
-
-</div>
-
-<div class="card">
-
-<h3>🎯 Goals</h3>
-
-<ul>
-<li>Learn new technologies and skills</li>
-<li>Build amazing projects and websites</li>
-<li>Improve coding and problem-solving abilities</li>
-<li>Create a strong personal portfolio</li>
-<li>Keep growing and learning every day</li>
-</ul>
-
-</div>
-
-</section>
-
-<div class="quote">
-🏁 "Speed on the track. Focus on the field. Passion in the heart." 🏏
-</div>
-
-<footer>
-© 2026 Anupp | Built with GitHub Pages
-</footer>
+function calculate(){
+    try{
+        display.value = eval(display.value);
+    }catch{
+        display.value = "Error";
+    }
+}
+</script>
 
 </body>
 </html>
-```

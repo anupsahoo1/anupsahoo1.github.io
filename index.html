@@ -4,253 +4,362 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advanced Scientific Calculator</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<title>Anupp | Portfolio</title>
 
 <style>
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+font-family:'Segoe UI',sans-serif;
 }
 
 body{
+background:#050505;
+color:white;
+overflow-x:hidden;
+}
+
+/* OPENING ANIMATION */
+
+.left{
+opacity:0;
+animation:slideLeft 2s ease forwards;
+animation-delay:1.2s;
+}
+
+.right{
+opacity:0;
+animation:slideRight 2s ease forwards;
+animation-delay:1.2s;
+}
+
+.center-profile{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+z-index:100;
+animation:profileZoom 1.5s ease forwards;
+}
+
+.center-profile h1,
+.tagline{
+opacity:0;
+animation:fadeIn 1s ease forwards;
+animation-delay:2.3s;
+}
+
+.cards,
+.quote,
+footer{
+opacity:0;
+animation:fadeIn 1s ease forwards;
+animation-delay:2.8s;
+}
+
+/* HERO */
+
+.hero{
 height:100vh;
 display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(135deg,#020617,#0f172a,#1e293b);
+position:relative;
 overflow:hidden;
 }
 
-.bg1,.bg2{
+.left,.right{
+width:50%;
+position:relative;
+}
+
+.side-image{
+width:100%;
+height:100%;
+object-fit:cover;
+filter:brightness(35%);
+animation:circleReveal 2s ease forwards;
+}
+
+.overlay{
 position:absolute;
-width:350px;
-height:350px;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+color:white;
+}
+
+.overlay p{
+font-size:26px;
+margin:10px 0;
+font-weight:bold;
+}
+
+/* PROFILE */
+
+.center-profile img{
+width:250px;
+height:250px;
 border-radius:50%;
-filter:blur(120px);
+object-fit:cover;
+border:6px solid white;
+box-shadow:0 0 35px rgba(255,255,255,.6);
 }
 
-.bg1{
-background:#00e5ff;
-top:-100px;
-left:-100px;
+.center-profile h1{
+font-size:65px;
+margin-top:20px;
 }
 
-.bg2{
-background:#7c3aed;
-bottom:-100px;
-right:-100px;
+.tagline{
+font-size:24px;
+font-weight:bold;
+margin-top:10px;
 }
 
-.container{
-width:900px;
-height:650px;
-display:flex;
+.f1{
+color:#ff3131;
+}
+
+.cricket{
+color:#3ea6ff;
+}
+
+.tech{
+color:#2ecc71;
+}
+
+/* CARDS */
+
+.cards{
+max-width:1400px;
+margin:50px auto;
+padding:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:20px;
 }
 
-.calc{
-flex:2;
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(25px);
-border:1px solid rgba(255,255,255,.15);
-border-radius:30px;
-padding:20px;
-box-shadow:0 20px 50px rgba(0,0,0,.4);
+.card{
+background:#111;
+border:1px solid #333;
+border-radius:15px;
+padding:25px;
+transition:.3s;
 }
 
-.history{
-flex:1;
-background:rgba(255,255,255,0.08);
-backdrop-filter:blur(25px);
-border:1px solid rgba(255,255,255,.15);
-border-radius:30px;
-padding:20px;
-color:white;
-overflow-y:auto;
+.card:hover{
+transform:translateY(-5px);
 }
 
-.display{
-width:100%;
-height:90px;
-border:none;
-outline:none;
-font-size:2rem;
-padding:20px;
-text-align:right;
-border-radius:20px;
-background:rgba(255,255,255,.08);
-color:white;
-margin-bottom:20px;
-}
-
-.buttons{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:10px;
-}
-
-button{
-height:65px;
-border:none;
-border-radius:16px;
-background:rgba(255,255,255,.08);
-color:white;
-font-size:1rem;
-cursor:pointer;
-transition:.25s;
-}
-
-button:hover{
-transform:translateY(-3px);
-background:rgba(255,255,255,.18);
-}
-
-.operator{
-background:linear-gradient(135deg,#8b5cf6,#6366f1);
-}
-
-.equal{
-background:linear-gradient(135deg,#06b6d4,#14b8a6);
-}
-
-.clear{
-background:linear-gradient(135deg,#ef4444,#f97316);
-}
-
-h2{
-color:white;
+.card h3{
+font-size:28px;
 margin-bottom:15px;
 }
 
-.history-item{
-margin-bottom:10px;
-padding:10px;
-background:rgba(255,255,255,.05);
-border-radius:12px;
+.card p{
+line-height:1.8;
 }
+
+.card ul{
+padding-left:20px;
+}
+
+.card li{
+margin-bottom:10px;
+}
+
+/* QUOTE */
+
+.quote{
+max-width:1200px;
+margin:40px auto;
+padding:25px;
+border:2px solid #ff3131;
+border-radius:15px;
+text-align:center;
+font-size:28px;
+font-weight:bold;
+}
+
+/* FOOTER */
+
+footer{
+background:#000;
+text-align:center;
+padding:25px;
+margin-top:40px;
+color:#aaa;
+}
+
+/* ANIMATIONS */
+
+@keyframes profileZoom{
+0%{
+transform:translate(-50%,-50%) scale(0.1);
+}
+100%{
+transform:translate(-50%,-50%) scale(1);
+}
+}
+
+@keyframes slideLeft{
+0%{
+transform:translateX(-100%);
+opacity:0;
+}
+100%{
+transform:translateX(0);
+opacity:1;
+}
+}
+
+@keyframes slideRight{
+0%{
+transform:translateX(100%);
+opacity:0;
+}
+100%{
+transform:translateX(0);
+opacity:1;
+}
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+}
+to{
+opacity:1;
+}
+}
+
+@keyframes circleReveal{
+0%{
+clip-path:circle(0% at 50% 50%);
+}
+100%{
+clip-path:circle(100% at 50% 50%);
+}
+}
+
 </style>
 </head>
+
 <body>
 
-<div class="bg1"></div>
-<div class="bg2"></div>
+<section class="hero">
 
-<div class="container">
+<div class="left">
 
-<div class="calc">
+<img src="profile1.jpeg" class="side-image" alt="Formula 1">
 
-<input id="display" class="display" placeholder="Enter Expression">
-
-<div class="buttons">
-
-<button class="clear" onclick="clearDisplay()">AC</button>
-<button onclick="append('(')">(</button>
-<button onclick="append(')')">)</button>
-<button onclick="append('pi')">π</button>
-<button onclick="append('e')">e</button>
-
-<button onclick="append('sin(')">sin</button>
-<button onclick="append('cos(')">cos</button>
-<button onclick="append('tan(')">tan</button>
-<button onclick="append('asin(')">sin⁻¹</button>
-<button onclick="append('acos(')">cos⁻¹</button>
-
-<button onclick="append('atan(')">tan⁻¹</button>
-<button onclick="append('log(')">log</button>
-<button onclick="append('sqrt(')">√</button>
-<button onclick="append('^')">xʸ</button>
-<button class="operator" onclick="append('/')">÷</button>
-
-<button onclick="append('7')">7</button>
-<button onclick="append('8')">8</button>
-<button onclick="append('9')">9</button>
-<button class="operator" onclick="append('*')">×</button>
-<button onclick="append('derivative(')">d/dx</button>
-
-<button onclick="append('4')">4</button>
-<button onclick="append('5')">5</button>
-<button onclick="append('6')">6</button>
-<button class="operator" onclick="append('-')">−</button>
-<button onclick="append('integral(')">∫</button>
-
-<button onclick="append('1')">1</button>
-<button onclick="append('2')">2</button>
-<button onclick="append('3')">3</button>
-<button class="operator" onclick="append('+')">+</button>
-<button class="equal" onclick="calculate()">=</button>
-
-<button onclick="append('0')">0</button>
-<button onclick="append('.')">.</button>
-
+<div class="overlay">
+<p>🏎 Speed</p>
+<p>🎯 Precision</p>
+<p>🔥 Passion</p>
 </div>
 
 </div>
 
-<div class="history">
-<h2>History</h2>
-<div id="history"></div>
+<div class="right">
+
+<img src="profile2.jpeg" class="side-image" alt="Cricket">
+
+<div class="overlay">
+<p>🏏 Focus</p>
+<p>💪 Determination</p>
+<p>🏆 Glory</p>
 </div>
 
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.2/math.min.js"></script>
+<div class="center-profile">
 
-<script>
+<img src="profile.jpeg" alt="Anupp">
 
-const display=document.getElementById("display");
-const history=document.getElementById("history");
+<h1>Anupp</h1>
 
-function append(value){
-display.value+=value;
-}
+<div class="tagline">
+<span class="f1">F1 Enthusiast</span> |
+<span class="cricket">Cricket Lover</span> |
+<span class="tech">Tech Lover</span>
+</div>
 
-function clearDisplay(){
-display.value="";
-}
+</div>
 
-function calculate(){
+</section>
 
-try{
+<section class="cards">
 
-let exp=display.value;
+<div class="card">
+<h3>👤 About Me</h3>
 
-if(exp.startsWith("derivative(")){
-let inside=exp.replace("derivative(","").slice(0,-1);
-let result=math.derivative(inside,'x').toString();
-display.value=result;
-addHistory(exp,result);
-return;
-}
+<p>
+Hey! I'm Anupp, a passionate student who loves the thrill of Formula 1
+and the excitement of Cricket. I am also deeply interested in
+technology and enjoy learning new things every day. My interests
+range from motorsport engineering and race strategy to gaming,
+smartphones and innovation.
+</p>
 
-if(exp.startsWith("integral(")){
-display.value="Use Algebrite for symbolic integration";
-return;
-}
+</div>
 
-let result=math.evaluate(exp);
+<div class="card">
 
-addHistory(exp,result);
+<h3>🏎 Formula 1</h3>
 
-display.value=result;
+<ul>
+<li>Love the speed and engineering behind F1 cars</li>
+<li>Follow race weekends and qualifying sessions</li>
+<li>Enjoy team strategies and pit stop battles</li>
+<li>Interested in aerodynamics and motorsport technology</li>
+<li>Watch highlights, interviews and race analysis</li>
+</ul>
 
-}
-catch{
-display.value="Error";
-}
-}
+</div>
 
-function addHistory(exp,res){
-history.innerHTML=
-`<div class="history-item">${exp}<br><b>${res}</b></div>`
-+ history.innerHTML;
-}
+<div class="card">
 
-</script>
+<h3>🏏 Cricket</h3>
+
+<ul>
+<li>Follow IPL and International Cricket</li>
+<li>Enjoy close matches and big tournaments</li>
+<li>Love batting masterclasses and match-winning innings</li>
+<li>Follow player performances and statistics</li>
+<li>Support the spirit of competition and teamwork</li>
+</ul>
+
+</div>
+
+<div class="card">
+
+<h3>🎯 Goals</h3>
+
+<ul>
+<li>Learn new technologies and skills</li>
+<li>Build amazing projects and websites</li>
+<li>Improve coding and problem-solving abilities</li>
+<li>Create a strong personal portfolio</li>
+<li>Keep growing and learning every day</li>
+</ul>
+
+</div>
+
+</section>
+
+<div class="quote">
+🏁 "Speed on the track. Focus on the field. Passion in the heart." 🏏
+</div>
+
+<footer>
+© 2026 Anupp | Built with GitHub Pages
+</footer>
 
 </body>
 </html>
 ```
+

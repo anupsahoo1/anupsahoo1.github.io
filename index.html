@@ -13,6 +13,7 @@ margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:'Segoe UI',sans-serif;
+scroll-behavior:smooth;
 }
 
 body{
@@ -21,102 +22,78 @@ color:white;
 overflow-x:hidden;
 }
 
-/* OPENING ANIMATION */
-
-.left{
-opacity:0;
-animation:slideLeft 2s ease forwards;
-animation-delay:1.2s;
-}
-
-.right{
-opacity:0;
-animation:slideRight 2s ease forwards;
-animation-delay:1.2s;
-}
-
-.center-profile{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-text-align:center;
-z-index:100;
-animation:profileZoom 1.5s ease forwards;
-}
-
-.center-profile h1,
-.tagline{
-opacity:0;
-animation:fadeIn 1s ease forwards;
-animation-delay:2.3s;
-}
-
-.cards,
-.quote,
-footer{
-opacity:0;
-animation:fadeIn 1s ease forwards;
-animation-delay:2.8s;
-}
-
-/* HERO */
+/* HERO SECTION */
 
 .hero{
-height:100vh;
-display:flex;
 position:relative;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
 overflow:hidden;
 }
 
-.left,.right{
+/* LEFT F1 IMAGE */
+
+.f1-side{
+position:absolute;
+left:0;
+top:0;
 width:50%;
-position:relative;
+height:100%;
 }
 
-.side-image{
+.f1-side img{
 width:100%;
 height:100%;
 object-fit:cover;
-filter:brightness(35%);
-animation:circleReveal 2s ease forwards;
+filter:brightness(30%);
 }
 
-.overlay{
+/* RIGHT CRICKET IMAGE */
+
+.cricket-side{
 position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
+right:0;
+top:0;
+width:50%;
+height:100%;
+}
+
+.cricket-side img{
+width:100%;
+height:100%;
+object-fit:cover;
+filter:brightness(30%);
+}
+
+/* CENTER PROFILE */
+
+.profile-box{
+position:relative;
+z-index:10;
 text-align:center;
-color:white;
+animation:zoomIn 1.5s ease;
 }
 
-.overlay p{
-font-size:26px;
-margin:10px 0;
-font-weight:bold;
-}
-
-/* PROFILE */
-
-.center-profile img{
-width:250px;
-height:250px;
+.profile-box img{
+width:260px;
+height:260px;
 border-radius:50%;
 object-fit:cover;
 border:6px solid white;
-box-shadow:0 0 35px rgba(255,255,255,.6);
+box-shadow:0 0 35px rgba(255,255,255,.5);
 }
 
-.center-profile h1{
-font-size:65px;
+.profile-box h1{
 margin-top:20px;
+font-size:4rem;
 }
 
 .tagline{
-font-size:24px;
-font-weight:bold;
 margin-top:10px;
+font-size:1.3rem;
+font-weight:bold;
 }
 
 .f1{
@@ -131,12 +108,15 @@ color:#3ea6ff;
 color:#2ecc71;
 }
 
-/* CARDS */
+/* CONTENT */
+
+.container{
+max-width:1300px;
+margin:auto;
+padding:40px 20px;
+}
 
 .cards{
-max-width:1400px;
-margin:50px auto;
-padding:20px;
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
 gap:20px;
@@ -154,9 +134,9 @@ transition:.3s;
 transform:translateY(-5px);
 }
 
-.card h3{
-font-size:28px;
+.card h2{
 margin-bottom:15px;
+font-size:1.8rem;
 }
 
 .card p{
@@ -174,75 +154,101 @@ margin-bottom:10px;
 /* QUOTE */
 
 .quote{
-max-width:1200px;
+max-width:1000px;
 margin:40px auto;
 padding:25px;
+text-align:center;
+font-size:1.6rem;
 border:2px solid #ff3131;
 border-radius:15px;
-text-align:center;
-font-size:28px;
-font-weight:bold;
 }
 
 /* FOOTER */
 
 footer{
 background:#000;
-text-align:center;
 padding:25px;
-margin-top:40px;
+text-align:center;
 color:#aaa;
+margin-top:40px;
 }
 
-/* ANIMATIONS */
+/* ANIMATION */
 
-@keyframes profileZoom{
+@keyframes zoomIn{
 0%{
-transform:translate(-50%,-50%) scale(0.1);
-}
-100%{
-transform:translate(-50%,-50%) scale(1);
-}
-}
-
-@keyframes slideLeft{
-0%{
-transform:translateX(-100%);
+transform:scale(0.1);
 opacity:0;
 }
 100%{
-transform:translateX(0);
+transform:scale(1);
 opacity:1;
 }
 }
 
-@keyframes slideRight{
-0%{
-transform:translateX(100%);
-opacity:0;
-}
-100%{
-transform:translateX(0);
-opacity:1;
-}
+/* MOBILE RESPONSIVE */
+
+@media(max-width:768px){
+
+.hero{
+min-height:85vh;
 }
 
-@keyframes fadeIn{
-from{
-opacity:0;
-}
-to{
-opacity:1;
-}
+.f1-side{
+width:100%;
+height:50%;
 }
 
-@keyframes circleReveal{
-0%{
-clip-path:circle(0% at 50% 50%);
+.cricket-side{
+width:100%;
+height:50%;
+top:50%;
 }
-100%{
-clip-path:circle(100% at 50% 50%);
+
+.profile-box img{
+width:170px;
+height:170px;
 }
+
+.profile-box h1{
+font-size:2.5rem;
+}
+
+.tagline{
+font-size:0.95rem;
+padding:0 10px;
+}
+
+.card{
+padding:20px;
+}
+
+.card h2{
+font-size:1.4rem;
+}
+
+.quote{
+font-size:1.1rem;
+margin:25px 15px;
+}
+
+}
+
+@media(max-width:480px){
+
+.profile-box img{
+width:140px;
+height:140px;
+}
+
+.profile-box h1{
+font-size:2rem;
+}
+
+.tagline{
+font-size:.85rem;
+}
+
 }
 
 </style>
@@ -252,31 +258,15 @@ clip-path:circle(100% at 50% 50%);
 
 <section class="hero">
 
-<div class="left">
-
-<img src="profile1.jpeg" class="side-image" alt="Formula 1">
-
-<div class="overlay">
-<p>🏎 Speed</p>
-<p>🎯 Precision</p>
-<p>🔥 Passion</p>
+<div class="f1-side">
+<img src="profile1.jpeg" alt="Formula 1">
 </div>
 
+<div class="cricket-side">
+<img src="profile2.jpeg" alt="Cricket">
 </div>
 
-<div class="right">
-
-<img src="profile2.jpeg" class="side-image" alt="Cricket">
-
-<div class="overlay">
-<p>🏏 Focus</p>
-<p>💪 Determination</p>
-<p>🏆 Glory</p>
-</div>
-
-</div>
-
-<div class="center-profile">
+<div class="profile-box">
 
 <img src="profile.jpeg" alt="Anupp">
 
@@ -292,11 +282,12 @@ clip-path:circle(100% at 50% 50%);
 
 </section>
 
-<section class="cards">
+<div class="container">
+
+<div class="cards">
 
 <div class="card">
-<h3>👤 About Me</h3>
-
+<h2>👤 About Me</h2>
 <p>
 Hey! I'm Anupp, a passionate student who loves the thrill of Formula 1
 and the excitement of Cricket. I am also deeply interested in
@@ -304,13 +295,10 @@ technology and enjoy learning new things every day. My interests
 range from motorsport engineering and race strategy to gaming,
 smartphones and innovation.
 </p>
-
 </div>
 
 <div class="card">
-
-<h3>🏎 Formula 1</h3>
-
+<h2>🏎 Formula 1</h2>
 <ul>
 <li>Love the speed and engineering behind F1 cars</li>
 <li>Follow race weekends and qualifying sessions</li>
@@ -318,13 +306,10 @@ smartphones and innovation.
 <li>Interested in aerodynamics and motorsport technology</li>
 <li>Watch highlights, interviews and race analysis</li>
 </ul>
-
 </div>
 
 <div class="card">
-
-<h3>🏏 Cricket</h3>
-
+<h2>🏏 Cricket</h2>
 <ul>
 <li>Follow IPL and International Cricket</li>
 <li>Enjoy close matches and big tournaments</li>
@@ -332,13 +317,10 @@ smartphones and innovation.
 <li>Follow player performances and statistics</li>
 <li>Support the spirit of competition and teamwork</li>
 </ul>
-
 </div>
 
 <div class="card">
-
-<h3>🎯 Goals</h3>
-
+<h2>🎯 Goals</h2>
 <ul>
 <li>Learn new technologies and skills</li>
 <li>Build amazing projects and websites</li>
@@ -346,13 +328,14 @@ smartphones and innovation.
 <li>Create a strong personal portfolio</li>
 <li>Keep growing and learning every day</li>
 </ul>
+</div>
 
 </div>
 
-</section>
-
 <div class="quote">
 🏁 "Speed on the track. Focus on the field. Passion in the heart." 🏏
+</div>
+
 </div>
 
 <footer>
@@ -362,4 +345,3 @@ smartphones and innovation.
 </body>
 </html>
 ```
-

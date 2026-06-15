@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand City Legends</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HUD -->
+    <div id="hud">
+        <div class="hud-box">
+            ❤️ Health:
+            <span id="health">100</span>
+        </div>
+
+        <div class="hud-box">
+            💰 Money:
+            <span id="money">0</span>
+        </div>
+
+        <div class="hud-box">
+            ⭐ Wanted:
+            <span id="wanted">0</span>
+        </div>
+    </div>
+
+    <!-- Minimap -->
+    <canvas id="minimap"></canvas>
+
+    <!-- Game Area -->
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <!-- Notifications -->
+    <div id="notification"></div>
+
+    <!-- Mobile Controls -->
+    <div id="mobileControls">
+
+        <div id="leftControls">
+            <button class="ctrl" id="up">▲</button>
+
+            <div class="row">
+                <button class="ctrl" id="left">◀</button>
+                <button class="ctrl" id="down">▼</button>
+                <button class="ctrl" id="right">▶</button>
+            </div>
+        </div>
+
+        <div id="rightControls">
+            <button class="action" id="enterCar">
+                🚗
+            </button>
+
+            <button class="action" id="shoot">
+                🔫
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen">
+        <h1>GRAND CITY LEGENDS</h1>
+        <p>Loading City...</p>
+    </div>
+
+    <!-- Game Over -->
+    <div id="gameOver">
+
+        <h1>GAME OVER</h1>
+
+        <p>
+            Final Money:
+            <span id="finalMoney">0</span>
+        </p>
+
+        <button id="restartBtn">
+            Restart
+        </button>
+
+    </div>
+
+    <!-- Pause Menu -->
+    <div id="pauseMenu">
+
+        <h1>PAUSED</h1>
+
+        <button id="resumeBtn">
+            Resume
+        </button>
+
+        <button id="saveBtn">
+            Save Game
+        </button>
+
+        <button id="loadBtn">
+            Load Game
+        </button>
+
+    </div>
+
+    <!-- Mission Panel -->
+    <div id="missionPanel">
+
+        <h3>Mission</h3>
+
+        <p id="missionText">
+            Collect $100
+        </p>
+
+    </div>
+
+    <!-- Audio -->
+    <audio id="pickupSound" preload="auto"></audio>
+    <audio id="shootSound" preload="auto"></audio>
+    <audio id="sirenSound" preload="auto"></audio>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
